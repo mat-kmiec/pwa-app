@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+
+    <!-- PWA -->
+     <meta rel="manifest" href="./manifest.json" />
+     <meta name="theme-color" content="#0f172a" />
+     <meta name="description" content="Opis strony" />
+     <link rel="apple-touch-icon" href="/icon-192.png" />
+
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		:root {
+			--bg: #0f172a;
+			--text: #e2e8f0;
+			--gap: 16px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100;
+			font-family: Arial, Helvetica, sans-serif;
+			color: var(--text);
+			padding: 24px;
+		}
+
+		.grid {
+			display: grid;
+			gap: var(--gap);
+			grid-template-columns: repeat(2, 1fr);
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+
+		.block {
+			min-height: 120px;
+			border-radius: 18px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 2rem;
+			font-weight: 700;
+			color: white;
+		}
+
+		.block-1 {
+			background: #ef4444;
+		}
+
+		.block-2 {
+			background: #f59e0b;
+		}
+
+		.block-3 {
+			background: #10b981;
+		}
+
+		.block-4 {
+			background: #3b82f6;
+		}
+
+		.block-5 {
+			background: #8b5cf6;
+		}
+
+		.block-6 {
+			background: #ec4899;
+		}
+
+		.full-width {
+			grid-column: 1 / -1;
+		}
+
+		.block-5,
+		.block-6 {
+			grid-column: 1 / -1;
+		}
+        @media (min-width: 800px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                /*
+                grid-template-areas:
+                    "block-1 block-1 block-1"
+                    "block-2 block-2 block-2"
+                    "block-3 block-4 block-5"
+                    "block-6 block-6 block-6";
+            
+*/}
+            .block-1,
+            .block-2,
+            .block-6 {
+                grid-column: 1 / -1;
+            }
+
+            .block-3,
+            .block-4,
+            .block-5 {
+                grid-column: span 1;
+            }
+        }
+        @media (min-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+                /*
+                grid-template-areas:
+                    "block-1 block-1 block-1"
+                    "block-2 block-3 block-4 block-5"
+                    "block-6 block-6 block-6";
+            
+*/}
+            .block-1,
+            .block-6 {
+                grid-column: 1 / -1;
+            }
+            .block-2,
+            .block-3,
+            .block-4,
+            .block-5 {
+                grid-column: span 1;
+            }
+        }
+	</style>
+</head>
+<body>
+	<main class="grid">
+		<section class="block block-1 full-width">1</section>
+		<section class="block block-2 full-width">2</section>
+		<div class="block block-3">3</div>
+		<div class="block block-4">4</div>
+		<div class="block block-5">5</div>
+		<div class="block block-6">6</div>
+	</main>
+    <!-- service worker -->
+     <script>
+         if ("serviceWorker" in navigator) {
+             window.addEventListener("load", function () {
+                 navigator.serviceWorker.register("./sw.js").then(
+                     function (registration) {
+                         console.log(
+                             "Service Worker registration successful with scope: ",
+                             registration.scope
+                         );
+                     },
+                     function (err) {
+                         console.log("Service Worker registration failed: ", err);
+                     }
+                 );
+             });
+         }
+</body>
+</html>
